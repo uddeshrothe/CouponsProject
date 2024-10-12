@@ -22,3 +22,36 @@ exports.getAllCoupons = async (req, res) => {
         res.status(500).json({ error: error.message })
     }
 }
+
+// Get Coupon by Id
+exports.getCouponById = async (req, res) => {
+    try {
+        const coupon = await Coupon.findById(req.params.id);
+        if (!coupon) { return res.json(404).json({ message: "Coupon not found." }) }
+        res.status(200).json(coupon)
+    } catch (error) {
+        res.status(500).json({ error: error.message })
+    }
+}
+
+// Delete a Coupon
+exports.deleteCoupon = async (req, res) => {
+    try {
+        const coupon = await Coupon.findByIdAndDelete(req.params.id);
+        if (!coupon) return res.json(404).json({ message: "Coupon not found" });
+        res.status(200).json({message: "Coupon deleted successfully!"})
+    } catch (error) {
+        res.status(500).json({ error: error.message })
+    }
+}
+
+// Update a coupon
+exports.updateCoupon = async (req, res) => {
+    try {
+        const coupon = await Coupon.findByIdAndUpdate(req.params.id, req.body, { new: true });
+        if (!coupon) { return res.json(404).json({ message: "Coupon not found." }) }
+        res.status(200).json(coupon)
+    } catch (error) {
+        res.status(500).json({ error: error.message })
+    }
+}
