@@ -8,4 +8,9 @@ router.get('/coupons/:id', couponController.getCouponById);
 router.delete('/coupons/:id', couponController.deleteCoupon);
 router.put('/coupons/:id', couponController.updateCoupon);
 
+router.post('/apply', couponController.applyCoupon);
+router.post('/create', couponController.createCoupon);
+router.post('/remove', couponController.removeCoupon);
+router.post('/applicablecoupons', couponController.getCouponsForCart);
+
 module.exports = router;
